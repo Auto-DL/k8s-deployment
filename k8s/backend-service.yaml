@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: autodl-backend-service
+spec:
+  ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: django-port
+  selector:
+    app: autodl-backend
+  type: ClusterIP

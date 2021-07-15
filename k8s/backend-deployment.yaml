@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autodl-backend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: autodl-backend
+    spec:
+      containers:
+        - name: autodl-backend
+          image: autodlhub/backend:v1-beta
+          ports:
+            - containerPort: 8000
+              name: django-port
+          env:
+            - name: MONGODB_URI
+              value: # mongodb://localhost:27017
+            - name: JWT_SECRET
+              value: # abcdefghijk
+            - name: FRONTEND_HOST
+              value: # http://host:3000
+          imagePullPolicy: Always
+  selector:
+    matchLabels:
+      app: autodl-backend

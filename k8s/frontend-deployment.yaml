@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autodl-frontend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: autodl-frontend
+    spec:
+      containers:
+        - name: autodl-frontend
+          image: autodlhub/frontend:v1-beta
+          ports:
+            - containerPort: 80
+              name: http-port
+          env:
+            - name: REACT_APP_BACKEND_API_URL
+              value: # http:/host/api
+          imagePullPolicy: Always
+  selector:
+    matchLabels:
+      app: autodl-frontend
