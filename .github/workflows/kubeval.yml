@@ -1,0 +1,17 @@
+name: "Kubeval"
+on: [push, pull_request]
+jobs:
+  kubeval:
+    name: "Kubeval"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Instal kubeval
+        run: |
+          wget https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
+          tar xf kubeval-linux-amd64.tar.gz
+          sudo cp kubeval /usr/local/bin
+      - name: Check kubeval
+        run: kubeval --version
+      - name: Run kubeval
+        run: kubeval --ignore-missing-schemas k8s/*
