@@ -24,3 +24,5 @@ kubectl apply -f ingress.yaml
 ![running pods](assets/pod.png)
 ![running services](assets/svc.png)
 4. You have a working [Auto-DL](https://github.com/Auto-DL/Auto-DL) deployment :tada:
+
+> **Note:** Install [kubeval](https://kubeval.instrumenta.dev/installation/) to run the pre-commit hooks for validating the k8s yaml configuration.
