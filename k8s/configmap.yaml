@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: autodl-config
+data:
+  HOST: https://api.domain.com
+  FRONTEND_HOST: https://beta.domain.com
+  REACT_APP_BACKEND_API_URL: https://api.domain.com

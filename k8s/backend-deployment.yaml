@@ -15,13 +15,11 @@ spec:
           ports:
             - containerPort: 8000
               name: django-port
-          env:
-            - name: MONGODB_URI
-              value: # mongodb://localhost:27017
-            - name: JWT_SECRET
-              value: # abcdefghijk
-            - name: FRONTEND_HOST
-              value: # http://host:3000
+          envFrom:
+            - secretRef:
+                name: autodl-secret
+            - configMapRef:
+                name: autodl-config
           imagePullPolicy: Always
   selector:
     matchLabels:

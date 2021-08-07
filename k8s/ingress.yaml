@@ -1,21 +1,30 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: autodl-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
-  labels:
-    app: autodl
-  name: autodl-ingress
 spec:
   rules:
-    - host: # host
-      http:
-        paths:
-          -
-            backend:
-              service:
-                name: autodl-frontend-service
-                port:
-                  number: 80
-            path: /
-            pathType: "Prefix"
+  - host: beta.domain.com # host
+    http:
+      paths:
+        -
+          backend:
+            service:
+              name: autodl-frontend-service
+              port:
+                number: 80
+          path: /
+          pathType: "Prefix"
+  - host: api.domain.com # host
+    http:
+      paths:
+        -
+          backend:
+            service:
+              name: autodl-backend-service
+              port:
+                number: 8000
+          path: /
+          pathType: "Prefix"

@@ -15,9 +15,11 @@ spec:
           ports:
             - containerPort: 80
               name: http-port
-          env:
-            - name: REACT_APP_BACKEND_API_URL
-              value: # http:/host/api
+          envFrom:
+            - secretRef:
+                name: autodl-secret
+            - configMapRef:
+                name: autodl-config
           imagePullPolicy: Always
   selector:
     matchLabels:

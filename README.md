@@ -10,19 +10,26 @@ Kubernetes configuration for deployment of Auto-DL.
 
 ## How to deploy
 
-1. Configure the `host` in `k8s/ingress.yml` and `env` variables in `k8s/*-deployment.yaml`
-2. Apply all the `yaml` configuration using `kubectl`
+1. Configure the variables in configmap.yaml
+2. Create a secrets file in `k8s/` with following contents
+```
+MONGODB_URI=YOUR_MONGODB_CONNECTION_STRING
+JWT_SECRET=YOUR_JWT_SECRET
+```
+3. Apply all the `yaml` configuration using `kubectl`
 ```sh
 cd k8s/
+kubectl apply -f configmap.yaml
+kubectl create secret generic autodl-secret --from-env-file=secrets
 kubectl apply -f backend-deployment.yaml
 kubectl apply -f backend-service.yaml
 kubectl apply -f frontend-deployment.yaml
 kubectl apply -f frontnend-service.yaml
 kubectl apply -f ingress.yaml
 ```
-3. Check the status of the `pods` and `services`
+4. Check the status of the `pods` and `services`
 ![running pods](assets/pod.png)
 ![running services](assets/svc.png)
-4. You have a working [Auto-DL](https://github.com/Auto-DL/Auto-DL) deployment :tada:
+5. You have a working [Auto-DL](https://github.com/Auto-DL/Auto-DL) deployment :tada:
 
 > **Note:** Install [kubeval](https://kubeval.instrumenta.dev/installation/) to run the pre-commit hooks for validating the k8s yaml configuration.
